@@ -4,7 +4,7 @@ import {MongoMemoryServer} from "mongodb-memory-server"
 import mongoose from "mongoose"
 import {app} from '../../app' 
 
-describe('POST /api/users/register (register a new user)', () => {
+describe('POST /api/user/register (register a new user)', () => {
 
     beforeAll(async () => {
         const mongoServer = await MongoMemoryServer.create()
@@ -27,7 +27,7 @@ describe('POST /api/users/register (register a new user)', () => {
 
             for (const body of bodyData) {
                 await User.deleteMany()
-                const response = await request(app).post('/api/users/register').send(body)
+                const response = await request(app).post('/api/user/register').send(body)
                 expect(response.statusCode).toBe(400)
                 expect(response.body).toEqual({message: "email , firstName , lastName and password are required"})
                 await User.deleteMany()
@@ -50,7 +50,7 @@ describe('POST /api/users/register (register a new user)', () => {
             ]  
             for (const body of bodyData) {
                 await User.deleteMany()
-                const response = await request(app).post('/api/users/register').send(body)
+                const response = await request(app).post('/api/user/register').send(body)
                 expect(response.statusCode).toBe(400)
                 expect(response.body).toEqual({message: 'email or password is not valid'})
                 await User.deleteMany()
@@ -70,7 +70,7 @@ describe('POST /api/users/register (register a new user)', () => {
                 lastName: "Omar"
             })
             // start test
-            await request(app).post('/api/users/register').send({
+            await request(app).post('/api/user/register').send({
                 email: "user@gmail.com",
                 password: "Person2!",
                 firstName: "Abdullah",
@@ -87,7 +87,7 @@ describe('POST /api/users/register (register a new user)', () => {
             await User.deleteMany()
 
             // start test
-            await request(app).post('/api/users/register').send({
+            await request(app).post('/api/user/register').send({
                 email: "user@gmail.com",
                 password: "Person2!",
                 firstName: "Abdullah",

@@ -14,11 +14,11 @@ apiRoutes.post('/instructor', verifyJWT , verifyRoles(ADMIN , MASTER) ,  require
 
 
       //users
-      .post('/users/register' , require('./controllers/user/register').handler)
-      .post('/users/login' , require("./controllers/user/login").handler)
+      .post('/user/register' , require('./controllers/user/register').handler)
+      .post('/user/login' , require("./controllers/user/login").handler)
       
       //courses
-      .post("/course",  verifyJWT , verifyRoles(ADMIN , MASTER) , require("./controllers/course/createNewCourse").handler)
+      .post("/courses",  verifyJWT , verifyRoles(ADMIN , MASTER) , require("./controllers/course/createNewCourse").handler)
       .get('/courses', require('./controllers/course/listCoursesInfo').handler)
       .patch('/courses/:id',  verifyJWT , verifyRoles(ADMIN , MASTER) , require('./controllers/course/updateCourseInfo').handler)
       .post('/courses/:courseId/lessons', verifyJWT  , verifyRoles( ADMIN  , MASTER), require("./controllers/course/addNewLessonToACourse").handler)

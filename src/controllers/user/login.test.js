@@ -4,7 +4,7 @@ import {MongoMemoryServer} from "mongodb-memory-server"
 import mongoose from "mongoose"
 import {app} from '../../app' 
 
-describe('POST /api/users/login (login an existing user)', () => {
+describe('POST /api/user/login (login an existing user)', () => {
 
     beforeAll(async () => {
         const mongoServer = await MongoMemoryServer.create()
@@ -28,7 +28,7 @@ describe('POST /api/users/login (login an existing user)', () => {
                 //setup test
                 await User.deleteMany()
                 //start test
-                const response = await request(app).post('/api/users/login').send(body)
+                const response = await request(app).post('/api/user/login').send(body)
                 expect(response.statusCode).toBe(400)
                 expect(response.body).toEqual({message: "Both email and password are required"})
                 //end test
@@ -43,7 +43,7 @@ describe('POST /api/users/login (login an existing user)', () => {
         test('should respond with status code 401' , async () => {
             await User.deleteMany()
 
-            await request(app).post('/api/users/login').send({
+            await request(app).post('/api/user/login').send({
                 email: "user@gmail.com",
                 password: "Person2!"
             }).expect(401)
@@ -56,14 +56,14 @@ describe('POST /api/users/login (login an existing user)', () => {
         test('should respond with status cod 200 and token in the json body' , async () => {
             // setup test
             await User.deleteMany()
-            await request(app).post('/api/users/register').send({
+            await request(app).post('/api/user/register').send({
                 email: "user@gmail.com",
                 password: "Person2!",
                 firstName: "Abdullah",
                 lastName: "Omar"
             })
 
-            await request(app).post('/api/users/login').send({
+            await request(app).post('/api/user/login').send({
                 email: "user@gmail.com",
                 password: "Person2!"
             }).expect(200)
@@ -78,14 +78,14 @@ describe('POST /api/users/login (login an existing user)', () => {
         test('should respond with status cod 200 and token in the json body' , async () => {
             // setup test
             await User.deleteMany()
-            await request(app).post('/api/users/register').send({
+            await request(app).post('/api/user/register').send({
                 email: "user@gmail.com",
                 password: "Person2!",
                 firstName: "Abdullah",
                 lastName: "Omar"
             })
 
-            const response = await request(app).post('/api/users/login').send({
+            const response = await request(app).post('/api/user/login').send({
                 email: "user@gmail.com",
                 password: "Person11!"
             })
