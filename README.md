@@ -12,7 +12,7 @@
 
 ## Features
 
-- Users can sign up a new account or  login to an existing account
+- User can sign up a new account or  login to an existing account
 - User can list the courses
 - admin can add instructors to the plateform
 - admin can create , update a new course and relate the course to a specific instructor
